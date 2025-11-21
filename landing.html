@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNA Structure Reports</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #e94560;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .link-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            min-width: 280px;
+        }
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .link-card h2 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .link-card p {
+            color: #aaa;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        .v1 { border-color: #e94560; }
+        .v2 { border-color: #21918c; }
+        .v1 h2 { color: #e94560; }
+        .v2 h2 { color: #21918c; }
+        footer {
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <h1>RNA Structure Comparison Reports</h1>
+    <div class="links">
+        <a href="index.html" class="link-card v1">
+            <h2>v1: Nucleotide Colors</h2>
+            <p>A (Red), U (Orange), G (Blue), C (Green)<br>
+            Interested region highlighted</p>
+        </a>
+        <a href="v2.html" class="link-card v2">
+            <h2>v2: Mutation Rate Colors</h2>
+            <p>Viridis colormap (0.0 - 1.0)<br>
+            DMS mutation rate visualization</p>
+        </a>
+    </div>
+    <footer>SeqeR4 Analysis - xFL024 Motifs</footer>
+</body>
+</html>
