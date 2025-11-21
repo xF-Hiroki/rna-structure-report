@@ -5,216 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RNA Structure Comparison Report</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1a1a2e;
-            color: #eee;
-        }
-
-        .page {
-            width: 100vw;
-            height: 56.25vw; /* 16:9 aspect ratio */
-            max-height: 100vh;
-            max-width: 177.78vh; /* 16:9 aspect ratio */
-            margin: 0 auto;
-            padding: 2%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            display: flex;
-            flex-direction: column;
-            page-break-after: always;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2%;
-        }
-
-        .page-header h1 {
-            font-size: 2.5vw;
-            color: #e94560;
-            margin-bottom: 0.5%;
-        }
-
-        .page-header .motif-info {
-            font-size: 1.2vw;
-            color: #aaa;
-        }
-
-        .structures-container {
-            display: flex;
-            justify-content: space-around;
-            flex: 1;
-            gap: 2%;
-        }
-
-        .structure-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 1.5%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .structure-panel h2 {
-            text-align: center;
-            font-size: 1.5vw;
-            color: #ffffff;
-            background: #e94560;
-            padding: 1%;
-            border-radius: 5px;
-            margin-bottom: 1%;
-        }
-
-        .structure-panel.previous h2 {
-            background: #533483;
-        }
-
-        .structure-panel.hepg2 h2 {
-            background: #e94560;
-        }
-
-        .structure-panel.thp1 h2 {
-            background: #0f3460;
-        }
-
-        .svg-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            min-height: 0;
-            padding: 2%;
-        }
-
-        .svg-container svg {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            display: block;
-        }
-
-        .structure-info {
-            text-align: center;
-            font-size: 0.9vw;
-            color: #888;
-            margin-top: 1%;
-        }
-
-        .method-tag {
-            display: inline-block;
-            background: rgba(233, 69, 96, 0.3);
-            padding: 0.3% 1%;
-            border-radius: 3px;
-            font-size: 0.8vw;
-        }
-
-        .alert {
-            background: rgba(255, 193, 7, 0.2);
-            border: 1px solid #ffc107;
-            color: #ffc107;
-            padding: 0.5%;
-            border-radius: 5px;
-            margin-top: 1%;
-            font-size: 0.8vw;
-            text-align: center;
-        }
-
-        .no-data {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            color: #666;
-            font-style: italic;
-        }
-
-        .legend {
-            display: flex;
-            justify-content: center;
-            gap: 2%;
-            margin-top: 1%;
-            font-size: 0.9vw;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5%;
-        }
-
-        .legend-color {
-            width: 1vw;
-            height: 1vw;
-            border-radius: 50%;
-        }
-
-        .sequence-display {
-            font-family: 'Courier New', monospace;
-            font-size: 0.5vw;
-            word-break: break-all;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.5%;
-            border-radius: 3px;
-            margin-top: 0.5%;
-            max-height: 3vw;
-            overflow-y: auto;
-            line-height: 1.2;
-        }
-
-        .seq-match {
-            background-color: #40E0D0;
-            color: #000;
-            padding: 0 1px;
-        }
-
-        .seq-nomatch {
-            color: #888;
-        }
-
-        .low-depth {
-            background: #ffc107;
-            color: #000;
-            padding: 0.2% 0.5%;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-
-        @media print {
-            .page {
-                page-break-after: always;
-                height: auto;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a2e; color: #eee; }
+        .page { width: 100vw; height: 56.25vw; max-height: 100vh; max-width: 177.78vh; margin: 0 auto; padding: 2%; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); display: flex; flex-direction: column; page-break-after: always; }
+        .page-header { text-align: center; margin-bottom: 2%; }
+        .page-header h1 { font-size: 2.5vw; color: #e94560; margin-bottom: 0.5%; }
+        .page-header .motif-info { font-size: 1.2vw; color: #aaa; }
+        .structures-container { display: flex; justify-content: space-around; flex: 1; gap: 2%; }
+        .structure-panel { flex: 1; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 1.5%; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .structure-panel h2 { text-align: center; font-size: 1.5vw; color: #ffffff; background: #e94560; padding: 1%; border-radius: 5px; margin-bottom: 1%; }
+        .structure-panel.previous h2 { background: #533483; }
+        .structure-panel.hepg2 h2 { background: #e94560; }
+        .structure-panel.thp1 h2 { background: #0f3460; }
+        .svg-container { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
+        .svg-container svg { max-width: 100%; max-height: 100%; }
+        .structure-info { text-align: center; font-size: 0.9vw; color: #aaa; margin-top: 1%; }
+        .method-tag { background: #40E0D0; color: #000; padding: 0.2% 0.8%; border-radius: 3px; font-weight: bold; }
+        .low-depth { background: #ffc107; color: #000; padding: 0.2% 0.5%; border-radius: 3px; font-weight: bold; }
+        .sequence-display { font-family: 'Courier New', monospace; font-size: 0.5vw; word-break: break-all; margin-top: 0.5%; background: rgba(0, 0, 0, 0.3); padding: 0.5%; border-radius: 3px; max-height: 3vw; overflow-y: auto; }
+        .sequence-display .highlight { background: #40E0D0; color: #000; padding: 0 1px; }
+        .no-data { color: #666; font-style: italic; text-align: center; padding: 20%; }
+        .alert { background: rgba(255, 193, 7, 0.2); border: 1px solid #ffc107; color: #ffc107; padding: 0.5%; border-radius: 5px; margin-top: 1%; font-size: 0.8vw; text-align: center; }
+        .legend { display: flex; justify-content: center; gap: 2%; margin-top: 1%; font-size: 0.8vw; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 0.5%; }
+        .legend-color { width: 1vw; height: 1vw; border-radius: 50%; }
+        @media print { .page { page-break-after: always; height: auto; } }
     </style>
 </head>
 <body>
 
-    <div class="page">
+    <div class="page" id="xFL024_0688">
         <div class="page-header">
             <h1>xFL024_0688 | Gene: C3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="93.9" y1="185.0" x2="93.9" y2="178.9" stroke="#666" stroke-width="1"/>
 <line x1="93.9" y1="178.9" x2="93.9" y2="172.8" stroke="#666" stroke-width="1"/>
@@ -426,20 +256,14 @@
 <circle cx="100.0" cy="178.9" r="1.5" fill="#808080"/>
 <circle cx="100.0" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 91 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 91 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">GAGACCAA</span><span class="seq-match">GCAGGGUACACCCAGCAGCUGGCCUUCAGACAACCCAGCUCUGCCUUUGCGGCCUUCGUGAAACGGGCACCCAGC</span><span class="seq-nomatch">UUGGUCUC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="91.3" y1="145.1" x2="89.4" y2="142.9" stroke="#666" stroke-width="1"/>
 <line x1="89.4" y1="142.9" x2="90.9" y2="140.4" stroke="#666" stroke-width="1"/>
@@ -1063,20 +887,14 @@
 <circle cx="95.2" cy="141.4" r="1.0" fill="#808080"/>
 <circle cx="93.7" cy="141.1" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 275 bp | <span class="method-tag">EternaFold</span> | Region: 136,589 | Motif: 131,655
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 275 bp | <span class="method-tag">EternaFold</span> | Region: 136,589 | Motif: 131,655</div>
                 <div class="sequence-display"><span class="seq-nomatch">ACCCUGAGCCCCUGUCCCCUCUCUGCACCCCGCCCCUGCCCUUUCUGGCGUGCCCCCUCUGCUCAGCCCCGGCUCUUUUGGGGGUUCCUCUCUCUUCUCU</span><span class="seq-match">GCAGGGUACACCCAGCAGCUGGCCUUCAGACAACCCAGCUCUGCCUUUGCGGCCUUCGUGAAACGGGCACCCAGC</span><span class="seq-nomatch">ACCUGGUGAGUCCCAACAGCCAGCUCAGGCCAUGCAUACUCCCCACCCUCAACCCCCAGCAGGGCCCGGACCCUGGCCAGGGGUGGUCCCUUAGGCCAGC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="90.6" y1="150.2" x2="88.9" y2="148.2" stroke="#666" stroke-width="1"/>
 <line x1="88.9" y1="148.2" x2="90.2" y2="146.1" stroke="#666" stroke-width="1"/>
@@ -1709,55 +1527,31 @@
 <circle cx="93.9" cy="146.9" r="1.0" fill="#808080"/>
 <circle cx="92.7" cy="146.6" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 275 bp | <span class="method-tag">RNAfold</span> | <span class="low-depth">Region: 1</span> | Motif: 1
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 275 bp | <span class="method-tag">RNAfold</span> | <span class="low-depth">Region: 1</span> | Motif: 1</div>
                 <div class="sequence-display"><span class="seq-nomatch">ACCCUGAGCCCCUGUCCCCUCUCUGCACCCCGCCCCUGCCCUUUCUGGCGUGCCCCCUCUGCUCAGCCCCGGCUCUUUUGGGGGUUCCUCUCUCUUCUCU</span><span class="seq-match">GCAGGGUACACCCAGCAGCUGGCCUUCAGACAACCCAGCUCUGCCUUUGCGGCCUUCGUGAAACGGGCACCCAGC</span><span class="seq-nomatch">ACCUGGUGAGUCCCAACAGCCAGCUCAGGCCAUGCAUACUCCCCACCCUCAACCCCCAGCAGGGCCCGGACCCUGGCCAGGGGUGGUCCCUUAGGCCAGC</span></div>
-
-            </div>
+</div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_0737">
         <div class="page-header">
             <h1>xFL024_0737 | Gene: BCL6</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="73.6" y1="185.0" x2="73.6" y2="181.1" stroke="#666" stroke-width="1"/>
 <line x1="73.6" y1="181.1" x2="73.6" y2="177.3" stroke="#666" stroke-width="1"/>
@@ -2068,20 +1862,14 @@
 <circle cx="77.5" cy="181.1" r="1.5" fill="#808080"/>
 <circle cx="77.5" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 133 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 133 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">CUUUGG</span><span class="seq-match">CCUUAAUCGUCUCCGGAGUCGAGACAUCUUGACUGAUGUUGUCAUUGUUGUGAGCCGUGAGCAGUUUAGAGCCCAUAAAACGGUCCUCAUGGCCUGCAGGUGAGGGAUCUGAAAGGAAAGG</span><span class="seq-nomatch">CCAAAG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="109.5" y1="164.8" x2="109.1" y2="163.6" stroke="#666" stroke-width="1"/>
 <line x1="109.1" y1="163.6" x2="109.4" y2="162.3" stroke="#666" stroke-width="1"/>
@@ -2823,62 +2611,34 @@
 <circle cx="112.1" cy="167.5" r="1.0" fill="#808080"/>
 <circle cx="111.6" cy="166.0" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 321 bp | <span class="method-tag">EternaFold</span> | Region: 33,674 | Motif: 47,328
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 321 bp | <span class="method-tag">EternaFold</span> | Region: 33,674 | Motif: 47,328</div>
                 <div class="sequence-display"><span class="seq-nomatch">UAACAGGAUUUUGGCCUCUUUUUUCAAGUGAAGACAAAAUGGCCUCGCCGGCUGACAGCUGUAUCCAGUUCACCCGCCAUGCCAGUGAUGUUCUUCUCAA</span><span class="seq-match">CCUUAAUCGUCUCCGGAGUCGAGACAUCUUGACUGAUGUUGUCAUUGUUGUGAGCCGUGAGCAGUUUAGAGCCCAUAAAACGGUCCUCAUGGCCUGCAGGUGAGGGAUCUGAAAGGAAAGG</span><span class="seq-nomatch">GUGGGUAAGUCAAAGUGGGGUGAUGGUGCUGGCAGCCAAGCAAGGCAGAACAUGUGGGCCUUUUACUGCAUCUGGGAUGACGUCUCGCUUUGUCUCCAGA</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_1008">
         <div class="page-header">
             <h1>xFL024_1008 | Gene: COL7A1</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="78.8" y1="172.3" x2="78.8" y2="167.7" stroke="#666" stroke-width="1"/>
 <line x1="78.8" y1="167.7" x2="78.8" y2="163.1" stroke="#666" stroke-width="1"/>
@@ -3175,20 +2935,14 @@
 <circle cx="83.5" cy="167.7" r="1.5" fill="#808080"/>
 <circle cx="83.5" cy="172.3" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 128 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 128 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">ACGU</span><span class="seq-match">CAACCCCAAGGCAGGGCCAAGCUGUAUCUGUCCUGUUUGUUUUCAGGGACCUGCUGUUGCUGGACCCAAAGGAGAAAAGGUAAGCCUGGUAUGGGGCAAGGGGAGGUUUCUACAGGGUUG</span><span class="seq-nomatch">ACGU</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="90.7" y1="157.8" x2="89.9" y2="159.4" stroke="#666" stroke-width="1"/>
 <line x1="89.9" y1="159.4" x2="89.2" y2="161.1" stroke="#666" stroke-width="1"/>
@@ -3940,20 +3694,14 @@
 <circle cx="93.4" cy="158.0" r="1.0" fill="#808080"/>
 <circle cx="92.4" cy="159.5" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 320 bp | <span class="method-tag">EternaFold</span> | Region: 29,503 | Motif: 32,890
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 320 bp | <span class="method-tag">EternaFold</span> | Region: 29,503 | Motif: 32,890</div>
                 <div class="sequence-display"><span class="seq-nomatch">UCCCUGCUGUCAGCGGUGACUCUGUGACUUCUGGGCGGGGACUGAGCUGUAUGACUUCCAAUUCCAUGUGACCUCCAUUCCAAUGAAGACUUUGAUCAUA</span><span class="seq-match">CAACCCCAAGGCAGGGCCAAGCUGUAUCUGUCCUGUUUGUUUUCAGGGACCUGCUGUUGCUGGACCCAAAGGAGAAAAGGUAAGCCUGGUAUGGGGCAAGGGGAGGUUUCUACAGGGUUG</span><span class="seq-nomatch">AGGUCUAGGUCAUAGGGCCUAUCUAUGGGACUUGGGGGGUCACAGGACUUGCUGGGUCAGGGGGUUAACUGGAGCCUGGGACUAGCACUGAUGGUCUUUG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="90.7" y1="157.8" x2="89.9" y2="159.4" stroke="#666" stroke-width="1"/>
 <line x1="89.9" y1="159.4" x2="89.2" y2="161.1" stroke="#666" stroke-width="1"/>
@@ -4705,55 +4453,31 @@
 <circle cx="93.4" cy="158.0" r="1.0" fill="#808080"/>
 <circle cx="92.4" cy="159.5" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 320 bp | <span class="method-tag">EternaFold</span> | Region: 38,044 | Motif: 42,528
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 320 bp | <span class="method-tag">EternaFold</span> | Region: 38,044 | Motif: 42,528</div>
                 <div class="sequence-display"><span class="seq-nomatch">UCCCUGCUGUCAGCGGUGACUCUGUGACUUCUGGGCGGGGACUGAGCUGUAUGACUUCCAAUUCCAUGUGACCUCCAUUCCAAUGAAGACUUUGAUCAUA</span><span class="seq-match">CAACCCCAAGGCAGGGCCAAGCUGUAUCUGUCCUGUUUGUUUUCAGGGACCUGCUGUUGCUGGACCCAAAGGAGAAAAGGUAAGCCUGGUAUGGGGCAAGGGGAGGUUUCUACAGGGUUG</span><span class="seq-nomatch">AGGUCUAGGUCAUAGGGCCUAUCUAUGGGACUUGGGGGGUCACAGGACUUGCUGGGUCAGGGGGUUAACUGGAGCCUGGGACUAGCACUGAUGGUCUUUG</span></div>
-
-            </div>
+</div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_1576">
         <div class="page-header">
             <h1>xFL024_1576 | Gene: MECP2</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="96.2" y1="169.2" x2="96.2" y2="164.6" stroke="#666" stroke-width="1"/>
 <line x1="96.2" y1="164.6" x2="96.2" y2="160.0" stroke="#666" stroke-width="1"/>
@@ -5084,20 +4808,14 @@
 <circle cx="100.8" cy="164.6" r="1.5" fill="#808080"/>
 <circle cx="100.8" cy="169.2" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 142 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 142 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">CGAGCAG</span><span class="seq-match">UCCGAUCUGUGCAGGAGACCGUACUCCCCAUCAAGAAGCGCAAGACCCGGGAGACGGUCAGCAUCGAGGUCAAGGAAGUGGUGAAGCCCCUGCUGGUGUCCACCCUCGGUGAGAAGAGCGGGAAAGGA</span><span class="seq-nomatch">CUGCUCG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="81.6" y1="174.6" x2="82.6" y2="172.5" stroke="#666" stroke-width="1"/>
 <line x1="82.6" y1="172.5" x2="84.2" y2="171.0" stroke="#666" stroke-width="1"/>
@@ -5846,20 +5564,14 @@
 <circle cx="83.3" cy="180.8" r="1.0" fill="#808080"/>
 <circle cx="82.0" cy="179.0" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 328 bp | <span class="method-tag">EternaFold</span> | Region: 26,541 | Motif: 24,781
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 328 bp | <span class="method-tag">EternaFold</span> | Region: 26,541 | Motif: 24,781</div>
                 <div class="sequence-display"><span class="seq-nomatch">GACCCUCAGGCCAUUCCCAAGAAACGGGGCCGAAAGCCGGGGAGUGUGGUGGCAGCCGCUGCCGCCGAGGCCAAAAAGAAAGCCGUGAAGGAGUCUUCUA</span><span class="seq-match">UCCGAUCUGUGCAGGAGACCGUACUCCCCAUCAAGAAGCGCAAGACCCGGGAGACGGUCAGCAUCGAGGUCAAGGAAGUGGUGAAGCCCCUGCUGGUGUCCACCCUCGGUGAGAAGAGCGGGAAAGGA</span><span class="seq-nomatch">CUGAAGACCUGUAAGAGCCCUGGGCGGAAAAGCAAGGAGAGCAGCCCCAAGGGGCGCAGCAGCAGCGCCUCCUCACCCCCCAAGAAGGAGCACCACCACC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="81.6" y1="174.6" x2="82.6" y2="172.5" stroke="#666" stroke-width="1"/>
 <line x1="82.6" y1="172.5" x2="84.2" y2="171.0" stroke="#666" stroke-width="1"/>
@@ -6608,55 +6320,31 @@
 <circle cx="83.3" cy="180.8" r="1.0" fill="#808080"/>
 <circle cx="82.0" cy="179.0" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 328 bp | <span class="method-tag">EternaFold</span> | Region: 44,302 | Motif: 39,388
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 328 bp | <span class="method-tag">EternaFold</span> | Region: 44,302 | Motif: 39,388</div>
                 <div class="sequence-display"><span class="seq-nomatch">GACCCUCAGGCCAUUCCCAAGAAACGGGGCCGAAAGCCGGGGAGUGUGGUGGCAGCCGCUGCCGCCGAGGCCAAAAAGAAAGCCGUGAAGGAGUCUUCUA</span><span class="seq-match">UCCGAUCUGUGCAGGAGACCGUACUCCCCAUCAAGAAGCGCAAGACCCGGGAGACGGUCAGCAUCGAGGUCAAGGAAGUGGUGAAGCCCCUGCUGGUGUCCACCCUCGGUGAGAAGAGCGGGAAAGGA</span><span class="seq-nomatch">CUGAAGACCUGUAAGAGCCCUGGGCGGAAAAGCAAGGAGAGCAGCCCCAAGGGGCGCAGCAGCAGCGCCUCCUCACCCCCCAAGAAGGAGCACCACCACC</span></div>
-
-            </div>
+</div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_1707">
         <div class="page-header">
             <h1>xFL024_1707 | Gene: APOC3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="109.2" y1="185.0" x2="109.2" y2="180.4" stroke="#666" stroke-width="1"/>
 <line x1="109.2" y1="180.4" x2="109.2" y2="175.7" stroke="#666" stroke-width="1"/>
@@ -6954,20 +6642,14 @@
 <circle cx="113.8" cy="180.4" r="1.5" fill="#FF4444"/>
 <circle cx="113.8" cy="185.0" r="1.5" fill="#4CAF50"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 128 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 128 bp</div>
                 <div class="sequence-display"><span class="seq-match">GUAAUCCAGUGAAGUUGAGAGGGUGGUGUGGUCCUGACUGGUGUCGUCCAGUGGGGACAUGGGUGUGGGUCCCAUGGUUGCCGCACGGUGACCGAUGGCUUCAGUUCCCUGAAAGACUACUGGAUUAC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="131.8" y1="120.3" x2="132.5" y2="117.3" stroke="#666" stroke-width="1"/>
 <line x1="132.5" y1="117.3" x2="131.6" y2="117.2" stroke="#666" stroke-width="1"/>
@@ -7619,64 +7301,34 @@
 <circle cx="138.0" cy="127.4" r="1.0" fill="#808080"/>
 <circle cx="136.7" cy="124.8" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 278 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 278 bp | <span class="method-tag">EternaFold</span> | Region: 36,179 | Motif: 32,547</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGAUGGCAGGGUUUGACUUGUGCUGGGGUUCCUGCAAGGAUAUCUCUUCUCCCAGGGUGGCAGCUGUGGGGGAUUCCUGCCUGAGGUCUCAGGGCUGUCG</span><span class="seq-match">UCCAGUGAAGUUGAGAGGGUGGUGUGGUCCUGACUGGUGUCGUCCAGUGGGGACAUGGGUGUGGGUCCCAUGGUUGCC</span><span class="seq-nomatch">UACAGAGGAGUUCUCAUGCCCUGCUCUGUUGCUUCCCCUGACUGAUUUAGGGGCUGGGUGACCGAUGGCUUCAGUUCCCUGAAAGACUACUGGAGCACCG</span></div>
-
-                <div class="alert">Partial alignment (78 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (78 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_1772">
         <div class="page-header">
             <h1>xFL024_1772 | Gene: APOC3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="81.9" y1="173.1" x2="81.9" y2="166.6" stroke="#666" stroke-width="1"/>
 <line x1="81.9" y1="166.6" x2="81.9" y2="160.1" stroke="#666" stroke-width="1"/>
@@ -7882,20 +7534,14 @@
 <circle cx="88.4" cy="166.6" r="1.5" fill="#4CAF50"/>
 <circle cx="88.4" cy="173.1" r="1.5" fill="#4CAF50"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 87 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 87 bp</div>
                 <div class="sequence-display"><span class="seq-match">GGGCAAGAGGAGCUCCCUGCACGGGUGCCCCCCACCCCUCAUCAUAACCUGAAGAACAUGGAGGCCCGGGAGGGGUGUCACUUGCCC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="131.0" y1="113.0" x2="129.8" y2="110.9" stroke="#666" stroke-width="1"/>
 <line x1="129.8" y1="110.9" x2="128.5" y2="108.9" stroke="#666" stroke-width="1"/>
@@ -8529,64 +8175,34 @@
 <circle cx="135.1" cy="120.6" r="1.0" fill="#808080"/>
 <circle cx="134.0" cy="118.5" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 267 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 267 bp | <span class="method-tag">EternaFold</span> | Region: 35,561 | Motif: 38,813</div>
                 <div class="sequence-display"><span class="seq-nomatch">GAGGGGAGGAGGAUGAAGAGGGGCAAGAGGAGCUCCCUGCCCAGCCCAGCCAGCAAGCCUGGAGAAGCACUUGCUAGAGCUAAGGAAGCCUCGGAGCUGG</span><span class="seq-match">ACGGGUGCCCCCCACCCCUCAUCAUAACCUGAAGAACAUGGAGGCCCGGGAGGGGUGUCACUUGCCC</span><span class="seq-nomatch">AAAGCUACACAGGGGGUGGGGCUGGAAGUGGCUCCAAGUGCAGGUUCCCCCCUCAUUCUUCAGGCUUAGGGCUGGAGGAAGCCUUAGACAGCCCAGUCCU</span></div>
-
-                <div class="alert">Partial alignment (67 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (67 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_1907">
         <div class="page-header">
             <h1>xFL024_1907 | Gene: PNPLA3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="109.8" y1="185.0" x2="109.8" y2="179.4" stroke="#666" stroke-width="1"/>
 <line x1="109.8" y1="179.4" x2="109.8" y2="173.8" stroke="#666" stroke-width="1"/>
@@ -8767,20 +8383,14 @@
 <circle cx="115.4" cy="179.4" r="1.5" fill="#2196F3"/>
 <circle cx="115.4" cy="185.0" r="1.5" fill="#2196F3"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 77 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 77 bp</div>
                 <div class="sequence-display"><span class="seq-match">CCAUGUAGAGCCUGUCCUAGCACCGGAAUGCUCGGUAAGGAUUUGUCGCAGGAGCUGCACAGGGAACCUCUACAUGG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="116.7" y1="129.9" x2="120.0" y2="129.9" stroke="#666" stroke-width="1"/>
 <line x1="120.0" y1="129.9" x2="123.2" y2="130.7" stroke="#666" stroke-width="1"/>
@@ -9355,22 +8965,14 @@
 <circle cx="108.5" cy="134.8" r="1.0" fill="#808080"/>
 <circle cx="110.8" cy="132.4" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 250 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 250 bp | <span class="method-tag">EternaFold</span> | Region: 42,399 | Motif: 30,450</div>
                 <div class="sequence-display"><span class="seq-nomatch">CCAACACAACAUGGACUCCAGUUUCCAUCUGCCUCUUUGCCAGGCACUUUUGUGCAGUGCACACACUGUACAACAGUAGACGGCAACCCUGAGAGCCAGA</span><span class="seq-match">GUAGAGCCUGUCCUAGCACCGGAAUGCUCGGUAAGGAUUUGUCGCAGGAG</span><span class="seq-nomatch">UGAUUCCAAAGCCAAUGUCCUCCCUCCAUAUCAGCCUGUUUGUGGCUCUGAGAAGCUCUGCCCACAUGUGAAAGCUUGUUAAGCACUUAAGCACUAACCC</span></div>
-
-                <div class="alert">Partial alignment (50 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (50 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="116.7" y1="129.9" x2="120.0" y2="129.9" stroke="#666" stroke-width="1"/>
 <line x1="120.0" y1="129.9" x2="123.2" y2="130.7" stroke="#666" stroke-width="1"/>
@@ -9945,57 +9547,31 @@
 <circle cx="108.5" cy="134.8" r="1.0" fill="#808080"/>
 <circle cx="110.8" cy="132.4" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 250 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 250 bp | <span class="method-tag">EternaFold</span> | Region: 49,324 | Motif: 35,110</div>
                 <div class="sequence-display"><span class="seq-nomatch">CCAACACAACAUGGACUCCAGUUUCCAUCUGCCUCUUUGCCAGGCACUUUUGUGCAGUGCACACACUGUACAACAGUAGACGGCAACCCUGAGAGCCAGA</span><span class="seq-match">GUAGAGCCUGUCCUAGCACCGGAAUGCUCGGUAAGGAUUUGUCGCAGGAG</span><span class="seq-nomatch">UGAUUCCAAAGCCAAUGUCCUCCCUCCAUAUCAGCCUGUUUGUGGCUCUGAGAAGCUCUGCCCACAUGUGAAAGCUUGUUAAGCACUUAAGCACUAACCC</span></div>
-
-                <div class="alert">Partial alignment (50 bp)</div>
-
-            </div>
+<div class="alert">Partial alignment (50 bp)</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_2611">
         <div class="page-header">
             <h1>xFL024_2611 | Gene: C3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="104.7" y1="185.0" x2="104.7" y2="181.2" stroke="#666" stroke-width="1"/>
 <line x1="104.7" y1="181.2" x2="104.7" y2="177.5" stroke="#666" stroke-width="1"/>
@@ -10311,20 +9887,14 @@
 <circle cx="108.5" cy="181.2" r="1.5" fill="#FFB700"/>
 <circle cx="108.5" cy="185.0" r="1.5" fill="#FFB700"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 131 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 131 bp</div>
                 <div class="sequence-display"><span class="seq-match">AAUCUGUGGCAAGUACCCCAAGGAGCUGCGCAAGUGCUGCGAGGACGGCAUGCGGGAGAACCCCAUGAGGUUCUCGUGCCAGCGCCGGACCCGUUUCAUCUCCCUGCAACAGGGGGAGGGGGCCACAGAUU</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="108.4" y1="176.9" x2="108.3" y2="173.7" stroke="#666" stroke-width="1"/>
 <line x1="108.3" y1="173.7" x2="108.1" y2="170.5" stroke="#666" stroke-width="1"/>
@@ -11014,64 +10584,34 @@
 <circle cx="108.8" cy="185.0" r="1.0" fill="#808080"/>
 <circle cx="106.3" cy="182.7" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 299 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 299 bp | <span class="method-tag">EternaFold</span> | Region: 23,390 | Motif: 23,508</div>
                 <div class="sequence-display"><span class="seq-nomatch">CUGGCGGCGGGGAAGUCCUCCCUGGGGUCCGUCCCGCGUCCCUCCUGCUGCCGGCCCCCGGCUGAGGGUGUGGCCUGGGGGAACACGUGCUCCCGCAGUC</span><span class="seq-match">GGCAAGUACCCCAAGGAGCUGCGCAAGUGCUGCGAGGACGGCAUGCGGGAGAACCCCAUGAGGUUCUCGUGCCAGCGCCGGACCCGUUUCAUCUCCCUG</span><span class="seq-nomatch">GGCGAGGCGUGCAAGAAGGUCUUCCUGGACUGCUGCAACUACAUCACAGAGCUGCGGCGGCAGCACGCGCGGGCCAGCCACCUGGGCCUGGCCAGGAGUA</span></div>
-
-                <div class="alert">Partial alignment (99 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (99 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_3056">
         <div class="page-header">
             <h1>xFL024_3056 | Gene: MET</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="73.8" y1="174.8" x2="73.8" y2="165.3" stroke="#666" stroke-width="1"/>
 <line x1="73.8" y1="165.3" x2="68.7" y2="164.0" stroke="#666" stroke-width="1"/>
@@ -11206,20 +10746,14 @@
 <circle cx="83.2" cy="165.3" r="1.5" fill="#2196F3"/>
 <circle cx="83.2" cy="174.8" r="1.5" fill="#2196F3"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 57 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 57 bp</div>
                 <div class="sequence-display"><span class="seq-match">CCUGAAGCCUAAUGGCAAAGUUGCUUUGCAAAUUUUUUUCUUGCAAAGUGAAUCAGG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="81.3" y1="129.1" x2="78.5" y2="131.6" stroke="#666" stroke-width="1"/>
 <line x1="78.5" y1="131.6" x2="74.8" y2="131.1" stroke="#666" stroke-width="1"/>
@@ -11777,64 +11311,34 @@
 <circle cx="76.9" cy="119.6" r="1.0" fill="#808080"/>
 <circle cx="78.6" cy="122.9" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 241 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 241 bp | <span class="method-tag">EternaFold</span> | Region: 24,868 | Motif: 32,515</div>
                 <div class="sequence-display"><span class="seq-nomatch">UGAAGUUUCUGUUACAAAAUAGAAUGGACAUUUUUUUUCCCCCCAAAGACAGCUGCCCUACACAAAAGGGAACAGAAAGAUGAUUUUACUUCCUUCCUAC</span><span class="seq-match">CCUGAAGCCUAAUGGCAAAGUUGCUUUGCAAAUUUUUUUCU</span><span class="seq-nomatch">CCCAAGAGUUUGCAGCUGUUUCUGUCUUUCCUAUUGUGCUUAUGUUCAGCUCUGGCUGGGAACACAAGCUACAGCCCCAGCUGUUGGGUGCAAAGUGAAU</span></div>
-
-                <div class="alert">Partial alignment (41 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (41 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_3655">
         <div class="page-header">
             <h1>xFL024_3655 | Gene: B4GALT1</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="93.9" y1="185.0" x2="93.9" y2="180.6" stroke="#666" stroke-width="1"/>
 <line x1="93.9" y1="180.6" x2="93.9" y2="176.3" stroke="#666" stroke-width="1"/>
@@ -12052,27 +11556,17 @@
 <circle cx="98.3" cy="180.6" r="1.5" fill="#808080"/>
 <circle cx="98.3" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 92 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 92 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">CAUCUUGG</span><span class="seq-match">ACAGGGUCUCUGCUGACUGCCAGGGGCGGGGGCUCUGCAUAGCCAGGAUGACGGCUUUCAUGUCCCAGAGACCUGU</span><span class="seq-nomatch">CCAAGAUG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
-
-                <div class="no-data">No HepG2 data</div>
-
-            </div>
-
+<div class="no-data">No HepG2 data</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="104.9" y1="181.6" x2="104.4" y2="178.3" stroke="#666" stroke-width="1"/>
 <line x1="104.4" y1="178.3" x2="105.7" y2="175.2" stroke="#666" stroke-width="1"/>
@@ -12716,55 +12210,31 @@
 <circle cx="113.7" cy="184.0" r="1.0" fill="#808080"/>
 <circle cx="110.5" cy="185.0" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 276 bp | <span class="method-tag">EternaFold</span> | Region: 36,983 | Motif: 36,373
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 276 bp | <span class="method-tag">EternaFold</span> | Region: 36,983 | Motif: 36,373</div>
                 <div class="sequence-display"><span class="seq-nomatch">AUUGCUGGUGACUCUGUGUGAACUGGCCUUUGGGAAAGAUCAGAGAGGGCAGAGGUGGCACAGGACAGUAAAGGAGAUGCUGUGCUGGCCUUCAGCCUGG</span><span class="seq-match">ACAGGGUCUCUGCUGACUGCCAGGGGCGGGGGCUCUGCAUAGCCAGGAUGACGGCUUUCAUGUCCCAGAGACCUGU</span><span class="seq-nomatch">UGUGCUGUGUAUUUUGAUUUCCUGUGUAUGCAAAUGUGUGUAUUUACCAUUGUGUAGGGGGCUGUGUCUGAUCUUGGUGUUCAAAACAGAACUGUAUUUU</span></div>
-
-            </div>
+</div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_3904">
         <div class="page-header">
             <h1>xFL024_3904 | Gene: BCL6</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="128.2" y1="185.0" x2="128.2" y2="179.4" stroke="#666" stroke-width="1"/>
 <line x1="128.2" y1="179.4" x2="128.2" y2="173.9" stroke="#666" stroke-width="1"/>
@@ -13071,20 +12541,14 @@
 <circle cx="133.8" cy="179.4" r="1.5" fill="#808080"/>
 <circle cx="133.8" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 136 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 136 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">CCGGGU</span><span class="seq-match">AGGGAAGAGAAAACAUUUAACUCUCCCAUGGUGGUUACUGACCCAGCGUGGGUGCGGGGAGAUUGGGAUGGGAAGUCCAGGUCUGGGGGCAGCCAGCAGUUGUCAGUUUCUCAUUGACAGCCCU</span><span class="seq-nomatch">ACCCGG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="93.1" y1="165.1" x2="91.9" y2="165.2" stroke="#666" stroke-width="1"/>
 <line x1="91.9" y1="165.2" x2="91.4" y2="167.3" stroke="#666" stroke-width="1"/>
@@ -13823,62 +13287,34 @@
 <circle cx="93.2" cy="171.8" r="1.0" fill="#808080"/>
 <circle cx="93.2" cy="169.6" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 324 bp | <span class="method-tag">EternaFold</span> | Region: 26,838 | Motif: 28,419
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 324 bp | <span class="method-tag">EternaFold</span> | Region: 26,838 | Motif: 28,419</div>
                 <div class="sequence-display"><span class="seq-nomatch">UGUUUUCUUCUUCAAUGGAAAGCUCUUUUAAAGGAUCUGUCUUCUCAAGGAGCCUAGUUGGCUAUGCACAAGGAAAGCGCCAAAAGAGCUAAAGGGAGGA</span><span class="seq-match">AGGGAAGAGAAAACAUUUAACUCUCCCAUGGUGGUUACUGACCCAGCGUGGGUGCGGGGAGAUUGGGAUGGGAAGUCCAGGUCUGGGGGCAGCCAGCAGUUGUCAGUUUCUCAUUGACAGCCCU</span><span class="seq-nomatch">GCUCCUUGGAGAUUGUUUUUGUGGGUAGUCUUGUGUGUGGCAUUGGUGGAAUGGCUGAAUCUAGGAGACGCGGCGUGUCCAGAACUUGCUGGAAAUUGGU</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_4005">
         <div class="page-header">
             <h1>xFL024_4005 | Gene: B4GALT1</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="93.1" y1="185.0" x2="93.1" y2="180.0" stroke="#666" stroke-width="1"/>
 <line x1="93.1" y1="180.0" x2="93.1" y2="174.9" stroke="#666" stroke-width="1"/>
@@ -14111,20 +13547,14 @@
 <circle cx="98.1" cy="180.0" r="1.5" fill="#FFB700"/>
 <circle cx="98.1" cy="185.0" r="1.5" fill="#FF4444"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 97 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 97 bp</div>
                 <div class="sequence-display"><span class="seq-match">UAUGGGGCCCUGUCCCGAAGCCUCAGUGGAGAGCAAUGGCUUGGAAGAACCAGGAUAUAAACUAGGUUCUAAAGUCUGCAGGGAGAUGGGCCCCAUA</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="85.5" y1="166.5" x2="86.0" y2="162.5" stroke="#666" stroke-width="1"/>
 <line x1="86.0" y1="162.5" x2="86.1" y2="159.4" stroke="#666" stroke-width="1"/>
@@ -14736,64 +14166,34 @@
 <circle cx="89.2" cy="159.4" r="1.0" fill="#808080"/>
 <circle cx="89.1" cy="162.6" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 263 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 263 bp | <span class="method-tag">EternaFold</span> | Region: 38,639 | Motif: 45,778</div>
                 <div class="sequence-display"><span class="seq-nomatch">GGCAAGUGGGACCUUCCCAGGGAACAAUUUGUUAACAGACCCAAAUAUCCUGUGAUUGGAUGGUGGCUGCCAAAUGCUUUGGAAGCUCAGAGGAAGGAGA</span><span class="seq-match">GAGAGCAAUGGCUUGGAAGAACCAGGAUAUAAACUAGGUUCUAAAGUCUGCAGGGAGAUGGGC</span><span class="seq-nomatch">UUCUCAGCUGGGGCCAGUGAGCAGGGACCUUAAGGCAGAAAGGAGCCUUGCAUGUUCCUGGAAAUUGAGAUGCCCACUGGGGUAGGAAAGCACCAGAAGC</span></div>
-
-                <div class="alert">Partial alignment (63 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (63 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_4011">
         <div class="page-header">
             <h1>xFL024_4011 | Gene: MECP2</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="105.2" y1="185.0" x2="105.2" y2="180.4" stroke="#666" stroke-width="1"/>
 <line x1="105.2" y1="180.4" x2="105.2" y2="175.8" stroke="#666" stroke-width="1"/>
@@ -15055,20 +14455,14 @@
 <circle cx="109.8" cy="180.4" r="1.5" fill="#2196F3"/>
 <circle cx="109.8" cy="185.0" r="1.5" fill="#4CAF50"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 111 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 111 bp</div>
                 <div class="sequence-display"><span class="seq-match">GCUGUGGGGCAGAGGAGGCGAGGAGGCCGUUGCCGCUGAUGUUUGGCCGUGAACAGGUGGGUGUCCUGGACGCCCGAGUUAGCCUCACCCGGUGACCUCUAGCCCUACAGC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="51.8" y1="164.0" x2="49.8" y2="165.4" stroke="#666" stroke-width="1"/>
 <line x1="49.8" y1="165.4" x2="49.1" y2="168.3" stroke="#666" stroke-width="1"/>
@@ -15671,22 +15065,14 @@
 <circle cx="51.7" cy="156.3" r="1.0" fill="#808080"/>
 <circle cx="51.1" cy="159.3" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 260 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 260 bp | <span class="method-tag">EternaFold</span> | Region: 27,165 | Motif: 34,666</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGGGCUGGGGCAGCCUCUGGGCCCACAUCCGGGGCCAGCUCCGGCGUGUGUUCAGUGUUAGCAGUGGGUCAUGAUGCUCUUUCCCACCCAGCCUGGGAUA</span><span class="seq-match">GGGGCAGAGGAGGCGAGGAGGCCGUUGCCGCUGAUGUUUGGCCGUGAACAGGUGGGUGUC</span><span class="seq-nomatch">UGCGUGCGUCCACGUGCGUGUUUUCUGACUGACAUGAAAUCGACGCCCGAGUUAGCCUCACCCGGUGACCUCUAGCCCUGCCCGGAUGGAGCGGGGCCCA</span></div>
-
-                <div class="alert">Partial alignment (60 bp)</div>
-
-            </div>
-
+<div class="alert">Partial alignment (60 bp)</div></div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="51.8" y1="164.0" x2="49.8" y2="165.4" stroke="#666" stroke-width="1"/>
 <line x1="49.8" y1="165.4" x2="49.1" y2="168.3" stroke="#666" stroke-width="1"/>
@@ -16289,57 +15675,31 @@
 <circle cx="51.7" cy="156.3" r="1.0" fill="#808080"/>
 <circle cx="51.1" cy="159.3" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 260 bp | <span class="method-tag">EternaFold</span>
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 260 bp | <span class="method-tag">EternaFold</span> | Region: 45,527 | Motif: 57,787</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGGGCUGGGGCAGCCUCUGGGCCCACAUCCGGGGCCAGCUCCGGCGUGUGUUCAGUGUUAGCAGUGGGUCAUGAUGCUCUUUCCCACCCAGCCUGGGAUA</span><span class="seq-match">GGGGCAGAGGAGGCGAGGAGGCCGUUGCCGCUGAUGUUUGGCCGUGAACAGGUGGGUGUC</span><span class="seq-nomatch">UGCGUGCGUCCACGUGCGUGUUUUCUGACUGACAUGAAAUCGACGCCCGAGUUAGCCUCACCCGGUGACCUCUAGCCCUGCCCGGAUGGAGCGGGGCCCA</span></div>
-
-                <div class="alert">Partial alignment (60 bp)</div>
-
-            </div>
+<div class="alert">Partial alignment (60 bp)</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_5290">
         <div class="page-header">
             <h1>xFL024_5290 | Gene: PNPLA3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="84.1" y1="180.0" x2="84.1" y2="173.9" stroke="#666" stroke-width="1"/>
 <line x1="84.1" y1="173.9" x2="84.1" y2="167.8" stroke="#666" stroke-width="1"/>
@@ -16589,20 +15949,14 @@
 <circle cx="90.2" cy="173.9" r="1.5" fill="#808080"/>
 <circle cx="90.2" cy="180.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 106 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 106 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGAG</span><span class="seq-match">GAGCCUAAAGUACACUCACUCUGGUAUAGAAAGGAUUCCUUACUGGGCAGAGGACAGGUGCAGCCUGGGGCUUUCCCAGGCAGGACACAGGGAGGCUC</span><span class="seq-nomatch">CUCU</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="52.4" y1="152.8" x2="49.0" y2="155.6" stroke="#666" stroke-width="1"/>
 <line x1="49.0" y1="155.6" x2="44.6" y2="156.5" stroke="#666" stroke-width="1"/>
@@ -17295,20 +16649,14 @@
 <circle cx="52.0" cy="141.4" r="1.0" fill="#808080"/>
 <circle cx="53.9" cy="144.8" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 298 bp | <span class="method-tag">EternaFold</span> | Region: 33,425 | Motif: 39,827
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 298 bp | <span class="method-tag">EternaFold</span> | Region: 33,425 | Motif: 39,827</div>
                 <div class="sequence-display"><span class="seq-nomatch">CAACAAUAAAAGUCAGCUUUUUUGUAUCCCAAGGUGGCCUGUGGACACCCACAUGGACAAAUGUUUACACUGGGACAGAAUUCAAAUGCAGAGGUCCCAG</span><span class="seq-match">GAGCCUAAAGUACACUCACUCUGGUAUAGAAAGGAUUCCUUACUGGGCAGAGGACAGGUGCAGCCUGGGGCUUUCCCAGGCAGGACACAGGGAGGCUC</span><span class="seq-nomatch">AGGAACCACCAAGUCCCUGGAAGGUGGAUCUGGAGGCGUUGGCAGGAGCCACUCCCUGGGUUCCAGGGCUCCAGGUUCCUGCUUUAACCCCCUGUCUCAC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="52.4" y1="152.8" x2="49.0" y2="155.6" stroke="#666" stroke-width="1"/>
 <line x1="49.0" y1="155.6" x2="44.6" y2="156.5" stroke="#666" stroke-width="1"/>
@@ -18001,55 +17349,31 @@
 <circle cx="52.0" cy="141.4" r="1.0" fill="#808080"/>
 <circle cx="53.9" cy="144.8" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 298 bp | <span class="method-tag">EternaFold</span> | Region: 34,363 | Motif: 42,119
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 298 bp | <span class="method-tag">EternaFold</span> | Region: 34,363 | Motif: 42,119</div>
                 <div class="sequence-display"><span class="seq-nomatch">CAACAAUAAAAGUCAGCUUUUUUGUAUCCCAAGGUGGCCUGUGGACACCCACAUGGACAAAUGUUUACACUGGGACAGAAUUCAAAUGCAGAGGUCCCAG</span><span class="seq-match">GAGCCUAAAGUACACUCACUCUGGUAUAGAAAGGAUUCCUUACUGGGCAGAGGACAGGUGCAGCCUGGGGCUUUCCCAGGCAGGACACAGGGAGGCUC</span><span class="seq-nomatch">AGGAACCACCAAGUCCCUGGAAGGUGGAUCUGGAGGCGUUGGCAGGAGCCACUCCCUGGGUUCCAGGGCUCCAGGUUCCUGCUUUAACCCCCUGUCUCAC</span></div>
-
-            </div>
+</div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_5317">
         <div class="page-header">
             <h1>xFL024_5317 | Gene: MAP2K1</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="92.9" y1="185.0" x2="92.9" y2="182.0" stroke="#666" stroke-width="1"/>
 <line x1="92.9" y1="182.0" x2="92.9" y2="178.9" stroke="#666" stroke-width="1"/>
@@ -18354,20 +17678,14 @@
 <circle cx="96.0" cy="182.0" r="1.5" fill="#808080"/>
 <circle cx="96.0" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 129 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 129 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">CAGC</span><span class="seq-match">GAAACUACCCCAGAUUUGGUGGCAGAAAAAUUUGGAUGGUACUGGGAGAGUCUAAACAGUGGUUAAAAGGUAAGGGCUCUGGAGUCAGGCUAAGUUUGAAGCCUAGCUCUGUUGUGGUUUU</span><span class="seq-nomatch">GCUG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="114.3" y1="120.0" x2="112.0" y2="118.3" stroke="#666" stroke-width="1"/>
 <line x1="112.0" y1="118.3" x2="111.2" y2="115.6" stroke="#666" stroke-width="1"/>
@@ -19093,20 +18411,14 @@
 <circle cx="120.5" cy="115.7" r="1.0" fill="#808080"/>
 <circle cx="119.6" cy="118.4" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 321 bp | <span class="method-tag">EternaFold</span> | Region: 26,263 | Motif: 34,704
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 321 bp | <span class="method-tag">EternaFold</span> | Region: 26,263 | Motif: 34,704</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGUAGAAGUACCUGUUAUCAUUCUGUUGUAAUCGUGAUACCACAACUGUAUUCUCUCAAGGAGGAGGAAUUUCAUUAAAACAGUAAAAGCAGGAUGAGAA</span><span class="seq-match">GAAACUACCCCAGAUUUGGUGGCAGAAAAAUUUGGAUGGUACUGGGAGAGUCUAAACAGUGGUUAAAAGGUAAGGGCUCUGGAGUCAGGCUAAGUUUGAAGCCUAGCUCUGUUGUGGUUUU</span><span class="seq-nomatch">UUUUUUUUUUUUUUUUUUUUGACAGUCUCGCUCUGUUGCCCAGGCCAGAGUGCAGUGGUGCGAUCUCGGCUCACCACAACCUCCACCUCCCGGCUUCAAG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="114.3" y1="120.0" x2="112.0" y2="118.3" stroke="#666" stroke-width="1"/>
 <line x1="112.0" y1="118.3" x2="111.2" y2="115.6" stroke="#666" stroke-width="1"/>
@@ -19832,55 +19144,31 @@
 <circle cx="120.5" cy="115.7" r="1.0" fill="#808080"/>
 <circle cx="119.6" cy="118.4" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 321 bp | <span class="method-tag">EternaFold</span> | Region: 21,823 | Motif: 27,039
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 321 bp | <span class="method-tag">EternaFold</span> | Region: 21,823 | Motif: 27,039</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGUAGAAGUACCUGUUAUCAUUCUGUUGUAAUCGUGAUACCACAACUGUAUUCUCUCAAGGAGGAGGAAUUUCAUUAAAACAGUAAAAGCAGGAUGAGAA</span><span class="seq-match">GAAACUACCCCAGAUUUGGUGGCAGAAAAAUUUGGAUGGUACUGGGAGAGUCUAAACAGUGGUUAAAAGGUAAGGGCUCUGGAGUCAGGCUAAGUUUGAAGCCUAGCUCUGUUGUGGUUUU</span><span class="seq-nomatch">UUUUUUUUUUUUUUUUUUUUGACAGUCUCGCUCUGUUGCCCAGGCCAGAGUGCAGUGGUGCGAUCUCGGCUCACCACAACCUCCACCUCCCGGCUUCAAG</span></div>
-
-            </div>
+</div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_5345">
         <div class="page-header">
             <h1>xFL024_5345 | Gene: B4GALT1</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="105.4" y1="185.0" x2="105.4" y2="177.2" stroke="#666" stroke-width="1"/>
 <line x1="105.4" y1="177.2" x2="105.4" y2="169.4" stroke="#666" stroke-width="1"/>
@@ -20073,20 +19361,14 @@
 <circle cx="113.2" cy="177.2" r="1.5" fill="#808080"/>
 <circle cx="113.2" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 82 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 82 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">GUGCUUGC</span><span class="seq-match">GGCCUAAGGAGGUGCAAAGCGAAGCAUCCUCACCAGCAUCCUGACUUGGCAGUGAGGCAUGGGACC</span><span class="seq-nomatch">GCAAGCAC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="49.8" y1="135.6" x2="49.5" y2="136.2" stroke="#666" stroke-width="1"/>
 <line x1="49.5" y1="136.2" x2="49.0" y2="136.6" stroke="#666" stroke-width="1"/>
@@ -20693,62 +19975,34 @@
 <circle cx="51.5" cy="131.9" r="1.0" fill="#808080"/>
 <circle cx="49.9" cy="134.1" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 266 bp | <span class="method-tag">EternaFold</span> | Region: 35,402 | Motif: 43,220
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 266 bp | <span class="method-tag">EternaFold</span> | Region: 35,402 | Motif: 43,220</div>
                 <div class="sequence-display"><span class="seq-nomatch">GAGUGAGACUCUGUCUCAAAAAAAAAAAAAAGAAAAGAAAGAAAAUUGCAUUUAGUUCCUGUAGACUGUGUGUCAAAUGUCUAAAUCUCUUCUAACAAAU</span><span class="seq-match">GGCCUAAGGAGGUGCAAAGCGAAGCAUCCUCACCAGCAUCCUGACUUGGCAGUGAGGCAUGGGACC</span><span class="seq-nomatch">CUGGAGGGAGUAGUGGUAAGUGUGACUCUGGAAUUCUUCCUGGGCUACUUGUCAGUGACUGGCUCCAGAUUGAGAGGAGAGCCCAGAGGACACAGGUGGC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_5525">
         <div class="page-header">
             <h1>xFL024_5525 | Gene: MET</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="98.5" y1="161.8" x2="98.5" y2="157.2" stroke="#666" stroke-width="1"/>
 <line x1="98.5" y1="157.2" x2="98.5" y2="152.5" stroke="#666" stroke-width="1"/>
@@ -21048,20 +20302,14 @@
 <circle cx="103.2" cy="157.2" r="1.5" fill="#FFB700"/>
 <circle cx="103.2" cy="161.8" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 127 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 127 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">C</span><span class="seq-match">AUCUUCUUUGAACCUCCUUACUCACCAAAGCUCUGUCAUCAUUGCUAAGAAGGUUGAGUUUCACACUCUUUUCUCCAUUGAGCCUGCUCCUUGGAGACAUGAAAAGAAAACAGGUAAAAGAGGGU</span><span class="seq-nomatch">G</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="103.0" y1="153.9" x2="102.2" y2="151.4" stroke="#666" stroke-width="1"/>
 <line x1="102.2" y1="151.4" x2="102.4" y2="148.7" stroke="#666" stroke-width="1"/>
@@ -21793,62 +21041,34 @@
 <circle cx="109.9" cy="157.1" r="1.0" fill="#808080"/>
 <circle cx="107.2" cy="157.0" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 325 bp | <span class="method-tag">EternaFold</span> | Region: 33,728 | Motif: 35,835
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 325 bp | <span class="method-tag">EternaFold</span> | Region: 33,728 | Motif: 35,835</div>
                 <div class="sequence-display"><span class="seq-nomatch">ACAUUUAGUGCAUCUAUUUAGUAUUUUAUAUGCACAUUUCAUAGUUCUAAUCUGAGAUCAUUAAAAUUUACAAAUUUUCUUUGAAAAAAAAACUUACCUA</span><span class="seq-match">AUCUUCUUUGAACCUCCUUACUCACCAAAGCUCUGUCAUCAUUGCUAAGAAGGUUGAGUUUCACACUCUUUUCUCCAUUGAGCCUGCUCCUUGGAGACAUGAAAAGAAAACAGGUAAAAGAGGGU</span><span class="seq-nomatch">CAUUUAGAGAGAAUGAGAAAAUAGGUGCACAGCCAAAACCUAAUGAAGAGGCAACUGCAGAGCUUUCCUCUCUACAUCUGGUGGGGACAGCAUUCUCAUC</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_5708">
         <div class="page-header">
             <h1>xFL024_5708 | Gene: C3</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="92.0" y1="185.0" x2="92.0" y2="181.8" stroke="#666" stroke-width="1"/>
 <line x1="92.0" y1="181.8" x2="92.0" y2="178.6" stroke="#666" stroke-width="1"/>
@@ -22153,20 +21373,14 @@
 <circle cx="95.2" cy="181.8" r="1.5" fill="#808080"/>
 <circle cx="95.2" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 130 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 130 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">AAGAUG</span><span class="seq-match">CCAGCGUGAGGUAGAGAAGACCCAGGUCUGAAGAGGGGAGGAUCAAGUCAGAGAAGCGUAGAUGCCCAUCUGAGAUGGAGGAGGCUCCCGUCCGAGGGGAGGGGACACUCCUGUCUGG</span><span class="seq-nomatch">CAUCUU</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="135.3" y1="120.5" x2="137.1" y2="118.8" stroke="#666" stroke-width="1"/>
 <line x1="137.1" y1="118.8" x2="135.5" y2="116.4" stroke="#666" stroke-width="1"/>
@@ -22904,62 +22118,34 @@
 <circle cx="133.8" cy="128.6" r="1.0" fill="#808080"/>
 <circle cx="133.4" cy="125.6" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 318 bp | <span class="method-tag">EternaFold</span> | Region: 22,442 | Motif: 23,267
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 318 bp | <span class="method-tag">EternaFold</span> | Region: 22,442 | Motif: 23,267</div>
                 <div class="sequence-display"><span class="seq-nomatch">AGGGGGGAGGAUGCCGCUGUCUGAGAGGGUAGGAGGAGGCCUCUGUCUGUUGGGAGAGGAGGCCCCUGUCUGAGGGUGAUGCCGAUGAGGUGAUGCCCUG</span><span class="seq-match">CCAGCGUGAGGUAGAGAAGACCCAGGUCUGAAGAGGGGAGGAUCAAGUCAGAGAAGCGUAGAUGCCCAUCUGAGAUGGAGGAGGCUCCCGUCCGAGGGGAGGGGACACUCCUGUCUGG</span><span class="seq-nomatch">AAGGGACAGAGGCCUUCAGAUGAGGAGCCAGGAGGCCCAGGCCUGAGGGAGGAGAAGGGCCUAGUCUGAUGGGGAGAAGGGCCCUUGCCUGAAGGCAGAG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
-    <div class="page">
+    <div class="page" id="xFL024_6000">
         <div class="page-header">
             <h1>xFL024_6000 | Gene: NFE2L2</h1>
-            <div class="motif-info">
-                RNA Secondary Structure Comparison
-            </div>
+            <div class="motif-info">Structure Comparison</div>
         </div>
-
         <div class="structures-container">
 
             <div class="structure-panel previous">
                 <h2>Screening (EternaFold)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="92.7" y1="185.0" x2="92.7" y2="182.2" stroke="#666" stroke-width="1"/>
 <line x1="92.7" y1="182.2" x2="92.7" y2="179.3" stroke="#666" stroke-width="1"/>
@@ -23297,20 +22483,14 @@
 <circle cx="95.6" cy="182.2" r="1.5" fill="#808080"/>
 <circle cx="95.6" cy="185.0" r="1.5" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 144 bp
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 144 bp</div>
                 <div class="sequence-display"><span class="seq-nomatch">CUUCGAGUA</span><span class="seq-match">GUGAAGUGGUAGUAGGAUAUAGUUUUUCACCUUCUGUGCAGAGGAUGUGUUGAUAAACAGGGCAGUAAGGAGAGCCUUAGAUUCAGUAUCUCCAUUAGGUGGAAGGAACCAUCCAUUACUCUUUUC</span><span class="seq-nomatch">UACUCGAAG</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel hepg2">
                 <h2>HepG2 (Current)</h2>
 
-                <div class="svg-container">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <div class="svg-container"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 <g class="backbone">
 <line x1="101.9" y1="182.5" x2="101.4" y2="180.5" stroke="#666" stroke-width="1"/>
 <line x1="101.4" y1="180.5" x2="101.8" y2="178.4" stroke="#666" stroke-width="1"/>
@@ -24053,110 +23233,53 @@
 <circle cx="107.3" cy="184.9" r="1.0" fill="#808080"/>
 <circle cx="105.2" cy="185.0" r="1.0" fill="#808080"/>
 </g>
-</svg>
-                </div>
-                <div class="structure-info">
-                    Length: 326 bp | <span class="method-tag">EternaFold</span> | Region: 37,812 | Motif: 49,296
-                </div>
+</svg></div>
+                <div class="structure-info">Length: 326 bp | <span class="method-tag">EternaFold</span> | Region: 37,812 | Motif: 49,296</div>
                 <div class="sequence-display"><span class="seq-nomatch">UUGAUUUUGUUUAUGAUUCAUAUUAGAUUGUUGUCAUCCAUAAAGAUUUGAACAGAGUCAAACAUUUUCUUGACCUUUUGUCAAAAAAAACUCUCCAGGU</span><span class="seq-match">GUGAAGUGGUAGUAGGAUAUAGUUUUUCACCUUCUGUGCAGAGGAUGUGUUGAUAAACAGGGCAGUAAGGAGAGCCUUAGAUUCAGUAUCUCCAUUAGGUGGAAGGAACCAUCCAUUACUCUUUUC</span><span class="seq-nomatch">AAGGGUGUCUUGGAGAGAUAAAGCACUUUCCUAGAUGAGGGAUGAAGUUGAUAUUGAAAUAGACCGAUGAGAUUAUUUUUAAGUCAAACAAAAGAAAAAU</span></div>
-
-            </div>
-
+</div>
             <div class="structure-panel thp1">
                 <h2>THP1 (Current)</h2>
-
-                <div class="no-data">No THP1 data</div>
-
-            </div>
+<div class="no-data">No THP1 data</div></div>
         </div>
-
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FF4444;"></div>
-                <span>A</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #FFB700;"></div>
-                <span>U</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #2196F3;"></div>
-                <span>G</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4CAF50;"></div>
-                <span>C</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #808080;"></div>
-                <span>Non-matching</span>
-            </div>
+            <div class="legend-item"><div class="legend-color" style="background: #FF4444;"></div><span>A</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #FFB700;"></div><span>U</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #2196F3;"></div><span>G</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #4CAF50;"></div><span>C</span></div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div><span>Non-matching</span></div>
         </div>
     </div>
 
     <div class="page">
         <div class="page-header">
             <h1>How to Read This Report</h1>
-            <div class="motif-info">
-                レポートの見方
-            </div>
+            <div class="motif-info">レポートの見方</div>
         </div>
-
         <div style="display: flex; flex-direction: column; gap: 2%; padding: 2%; font-size: 1.1vw; line-height: 1.6;">
             <div style="background: rgba(255,255,255,0.05); padding: 2%; border-radius: 10px;">
                 <h3 style="color: #e94560; margin-bottom: 1%;">Panel Structure / パネル構成</h3>
                 <ul style="margin-left: 2%;">
-                    <li><strong style="color: #533483;">Screening (EternaFold)</strong>: Initial screening structure prediction (interested region only)</li>
-                    <li><strong style="color: #e94560;">HepG2 (Current)</strong>: Current prediction with ±100bp context window</li>
-                    <li><strong style="color: #0f3460;">THP1 (Current)</strong>: Current prediction with ±100bp context window</li>
+                    <li><strong style="color: #533483;">Screening (EternaFold)</strong>: Initial screening prediction</li>
+                    <li><strong style="color: #e94560;">HepG2 (Current)</strong>: ±100bp context prediction</li>
+                    <li><strong style="color: #0f3460;">THP1 (Current)</strong>: ±100bp context prediction</li>
                 </ul>
             </div>
-
             <div style="background: rgba(255,255,255,0.05); padding: 2%; border-radius: 10px;">
                 <h3 style="color: #e94560; margin-bottom: 1%;">Nucleotide Colors / 塩基の色</h3>
                 <div style="display: flex; gap: 3%; margin-left: 2%;">
-                    <span><span style="color: #FF4444;">●</span> A (Adenine)</span>
-                    <span><span style="color: #FFB700;">●</span> U (Uracil)</span>
-                    <span><span style="color: #2196F3;">●</span> G (Guanine)</span>
-                    <span><span style="color: #4CAF50;">●</span> C (Cytosine)</span>
-                    <span><span style="color: #808080;">●</span> Non-matching region (flanking)</span>
+                    <span><span style="color: #FF4444;">●</span> A</span>
+                    <span><span style="color: #FFB700;">●</span> U</span>
+                    <span><span style="color: #2196F3;">●</span> G</span>
+                    <span><span style="color: #4CAF50;">●</span> C</span>
+                    <span><span style="color: #808080;">●</span> Flanking</span>
                 </div>
-                <p style="margin-top: 1%; margin-left: 2%; color: #aaa;">
-                    Colored nucleotides = interested region / カラー塩基 = 興味領域<br>
-                    Gray nucleotides = flanking context (±100bp) / グレー塩基 = フランキング領域
-                </p>
             </div>
-
             <div style="background: rgba(255,255,255,0.05); padding: 2%; border-radius: 10px;">
-                <h3 style="color: #e94560; margin-bottom: 1%;">Depth Information / Depth情報</h3>
+                <h3 style="color: #e94560; margin-bottom: 1%;">Depth Info / Depth情報</h3>
                 <ul style="margin-left: 2%;">
-                    <li><strong>Region</strong>: Average sequencing depth in the interested region<br>
-                        <span style="color: #aaa;">興味領域の平均シーケンシングdepth</span></li>
-                    <li><strong>Motif</strong>: Average sequencing depth across the entire motif (full-length reference)<br>
-                        <span style="color: #aaa;">モチーフ全体（全長リファレンス）の平均シーケンシングdepth</span></li>
-                </ul>
-            </div>
-
-            <div style="background: rgba(255,255,255,0.05); padding: 2%; border-radius: 10px;">
-                <h3 style="color: #e94560; margin-bottom: 1%;">Highlights & Warnings / ハイライトと警告</h3>
-                <ul style="margin-left: 2%;">
-                    <li><span style="background: #ffc107; color: #000; padding: 0.2% 0.5%; border-radius: 3px; font-weight: bold;">Yellow highlight on Region</span>:
-                        Low depth warning - depth is below threshold (3,367)<br>
-                        <span style="color: #aaa;">低Depth警告 - depthがしきい値以下（データの信頼性が低い可能性）</span></li>
-                    <li><span style="background: #40E0D0; color: #000; padding: 0 2px;">Turquoise highlight in sequence</span>:
-                        Interested region within the context sequence<br>
-                        <span style="color: #aaa;">コンテキスト配列内の興味領域</span></li>
-                    <li><span style="background: rgba(255, 193, 7, 0.2); border: 1px solid #ffc107; color: #ffc107; padding: 0.3% 1%; border-radius: 3px;">Yellow alert box</span>:
-                        Partial alignment or sequence mismatch warning<br>
-                        <span style="color: #aaa;">部分的アラインメントまたは配列の不一致警告</span></li>
-                </ul>
-            </div>
-
-            <div style="background: rgba(255,255,255,0.05); padding: 2%; border-radius: 10px;">
-                <h3 style="color: #e94560; margin-bottom: 1%;">Method Tags / 予測手法タグ</h3>
-                <ul style="margin-left: 2%;">
-                    <li><strong>EternaFold</strong>: EternaFold with DMS constraints (preferred)</li>
-                    <li><strong>RNAfold</strong>: RNAfold with SHAPE constraints (fallback)</li>
+                    <li><strong>Region</strong>: Interested region depth</li>
+                    <li><strong>Motif</strong>: Full motif depth</li>
+                    <li><span style="background: #ffc107; color: #000; padding: 0.2% 0.5%; border-radius: 3px;">Yellow</span>: Low depth warning (&lt;3,436)</li>
                 </ul>
             </div>
         </div>
